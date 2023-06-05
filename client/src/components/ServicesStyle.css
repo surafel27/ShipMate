@@ -1,0 +1,10 @@
+.moving-card {
+    justify-content: center;
+    column-gap: 20px;
+    padding: 10px;
+    
+}
+.moving-card h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
