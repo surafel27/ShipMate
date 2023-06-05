@@ -69,3 +69,7 @@
   .crt-link:hover {
     color: #116406;
   }
+  .err {
+    color: red;
+    font-weight: 800;
+  }

@@ -12,15 +12,19 @@ const register = (req, res) => {
         if(err) return res.json(err)
         if(data.length) return res.status(409).json("User Exists!");
         //hash the password
-        saltRound = 10;
-       const hashedPassword = bcrypt.hash(req.body.password, saltRound, (err, data) => {
-           if(err) console.log(err);
-       }); 
+        saltRounds = 10;
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const hashedPassword = bcrypt.hashSync(req.body.password, salt); 
         const userId = uuidv4();
         const verificationCode = Math.floor(100000 + Math.random() * 900000);
-        const isVerifyed = false;
-        const createdAt = new Date().toISOString();
-        const q = "INSERT INTO user_traveller(userId, fullName, email, phoneNumber, password, verificationCode, isVerifyed, created_at) VALUES (?)";
+        const isVerifyed = 'false';
+        const ts = Date.now();
+        const date_time = new Date(ts);
+        const date = date_time.getDate();
+        const month = date_time.getMonth();
+        const year = date_time.getFullYear();
+        const createdAt = date + "-" + month + "-" + year;
+        const q = "INSERT INTO user_traveller(userId, fullName, email, phoneNumber, password, verificationCode, isVerifyed, created_at) VALUES (?,?,?,?,?,?,?,?)";
         const values = [
             userId,
             req.body.fullName,
@@ -31,12 +35,12 @@ const register = (req, res) => {
             isVerifyed,
             createdAt,
         ];
-        db.query(q, [values], (err, data) => {
+        db.query(q, [...values], (err, data) => {
             if (err) {
-                return res.status(500).json(err);
+                return res.status(500).json({message: "Failed To Create Account!"});
             }
-            const token = jwt.sign({ userId: data[0].userId }, config.jwtSecret);
-            const {password, ...other} = data[0];
+            const token = jwt.sign({ userId: values.userId }, config.jwtSecret);
+            const {hashedPassword, ...other} = values;
     
             res
               .cookie("access_token", token, {
@@ -92,28 +96,25 @@ const login = (req, res) => {
     db.query(q, [req.body.email], (err, data) => {
         if (err) return res.json(err);
         if (data.length === 0) return res.status(404).json("user not found");
-        //if (data[0].isVerifyed === false) return res.status(400).json("You are not verifyed");
+        //if (data[0].isVerifyed === 'false') return res.status(400).json("You'r account not verifyed");
         //check password
         const isPasswordCorrect = bcrypt.compare(req.body.password, data[0].password);
         if (!isPasswordCorrect) return res.status(400).json("Wrong username or password");
        
-        const token = jwt.sign({ userId: data[0].userId }, "andoMhdyritycthdbsgdcptyhNHtDEDL");
+        const token = jwt.sign({ userId: data[0].userId }, config.jwtSecret);
         const {password, ...other} = data[0];
 
-        res
-          .cookie("access_token", token, {
+        res.cookie("access_token", token, {
             httpOnly:true,
-        })
-          .status(200)
-          .json(other);
+        }).status(200).json(other);
     });
     
 };
 const logout = (req, res) => {
     res.clearCookie("access_token", {
         sameSite: "none",
-        secure: true
-    }).status(200).json("user hasbeen logged out")
+        secure: false
+    }).status(200).json("user has been logged out")
 };
 
 

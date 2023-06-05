@@ -26,7 +26,7 @@ try {
   await Axios.post("http://localhost:8800/api/sender/register", inputs)
   navigate('/account/Identity/sender')
 } catch(err) {
-    setError(err.response.data)
+    setError(`${err.response.data.message}`)
 }
 }
 
@@ -44,6 +44,7 @@ try {
     </div>
     <form onSubmit={handleSubmit} className="signup-form">
       <h2>Create Sender Account!<br></br>Post deliveries in minutes.</h2>
+      {err && <p className='err'>{err}</p>}
       <input placeholder="Full Name" type="text" id="fullName" name="fullName" onChange={handleChange}/>
       <input placeholder="E-mail" type="email" id="email" name="email" onChange={handleChange} />
       <input placeholder="+2519********" type="text" id="phoneNumber" name="phoneNumber" onChange={handleChange}/>
@@ -76,16 +77,15 @@ e.preventDefault()
 try {
   await Axios.post("http://localhost:8800/api/traveller/register", inputs)
   navigate('/account/Identity/traveller')
-console.log(res)
 } catch(err) {
-    setError(err.response.data)
+  setError(`${err.response.data.message}`)
 }
 }
   return (
     <div className="signup-form-container-traveller">
     <form onSubmit={handleSubmitt} className="signup-form">
       <h2>Create Traveller Account!<br></br>Make money on the way.</h2>
-      
+      {err && <p className='err'>{err}</p>}
       <input placeholder="Full Name" type="text" id="fullName" name="fullName" onChange={handleChange} />
       <input placeholder="E-mail" type="email" id="email" name="email" onChange={handleChange} />
       <input placeholder="+2519********" type="text" id="phoneNumber" name="phoneNumber" onChange={handleChange}/>

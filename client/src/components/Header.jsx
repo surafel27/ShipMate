@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 //import Popup from './Popup';
 import "./HeaderStyle.css"
 import Profile from "../assets/profile.png"
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 function Header() {
 return(
@@ -18,6 +19,7 @@ return(
 function HeaderDashboard(props) {
   const [showPopup, setShowPopup] = useState(false);
   const popupRef = useRef(null);
+  const {currentUser} = useContext(AuthContext)
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -51,6 +53,7 @@ function HeaderDashboard(props) {
       )}
     </div>
           <div className="notification-icon">
+            <p>{currentUser?.fullName}</p>
             <i className="fa fa-bell"></i>
           </div>
           <div className="user-photo">

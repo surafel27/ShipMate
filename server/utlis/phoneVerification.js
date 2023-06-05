@@ -1,13 +1,13 @@
-const twilio = require('twilio');
-const accountSid = 'AC53e34c9bebe01304246ea7d6550f9897';
-const authToken = '1e160af6344daada5818ea7800b29164';
-const client = twilio(accountSid, authToken);
+const { Vonage } = require('@vonage/server-sdk')
+const apiKey = '0a0368b0';
+const apiSecret = 'OeckU2Y6lvKca4yH';
+const client = new Vonage(apiKey, apiSecret);
 
  exports.sendVerificationCode =  function (phoneNumber, verificationCode) {
     client.messages
       .create({
         body: `Your verification code for signup in shipmate is: ${verificationCode}`,
-        from: '+13157376849',
+        from: "Shipmate",
         to: phoneNumber,
       })
       .then((message) => console.log('Verification code sent:', message.sid))

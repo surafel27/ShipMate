@@ -7,11 +7,14 @@ import SignUp from "./pages/SignUp.jsx";
 import Identity from "./pages/Identity.jsx";
 import SenderDashboard from "./pages/sender/Dashboard.jsx";
 import TravellerDashboard from "./pages/traveller/Dashboard.jsx";
+import PhoneIdentity from "./pages/PhoneVerification.jsx"
 
 const SenderIdentity = Identity.sender;
 const TravellerIdentity = Identity.traveller;
 const SignupTraveller = SignUp.signUptraveller;
 const SignupSender = SignUp.signUpsender;
+const SenderMobileIdentity = PhoneIdentity.sender;
+const TravellerMobileIdentity = PhoneIdentity.traveller;
 
 const Layout = () => {
   return (
@@ -61,7 +64,16 @@ const router = createBrowserRouter([
   {
     path: "/user/account/sender/dashboard",
     element: <SenderDashboard />
+  },
+  {
+    path: "/user/account/sender/mobile/verify",
+    element: <SenderMobileIdentity />
+  },
+  {
+    path: "/user/account/traveller/mobile/verify",
+    element: <TravellerMobileIdentity />
   }
+
 
 ]);
 

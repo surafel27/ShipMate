@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
+import Sidebar from '../../components/Sidebar';
 const TravellerDashboard = () => {
+    const { currentUser } = useContext(AuthContext);
     return(
-        <div is Sende Dash Board></div>
+        < Sidebar />
     )
 }
 export default TravellerDashboard;
