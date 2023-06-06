@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import "./HeaderStyle.css"
 import Profile from "../assets/profile.png"
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/authContext';
 
 function Header() {
 return(
@@ -16,27 +15,7 @@ return(
     </>
 )
 }
-function HeaderDashboard(props) {
-  const [showPopup, setShowPopup] = useState(false);
-  const popupRef = useRef(null);
-  const {currentUser} = useContext(AuthContext)
-
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
-  const handleClickOutside = (event) => {
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      setShowPopup(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+function HeaderDashboard() {
   return(
       <>
        <header >
@@ -44,16 +23,7 @@ function HeaderDashboard(props) {
           <h1>shipmate</h1>
         </div>
          <div className="fixed-header">
-         <div>
-      <button onClick={togglePopup}>Open Pop-up</button>
-      {showPopup && (
-        <div ref={popupRef}>
-          <Popup onClose={togglePopup} />
-        </div>
-      )}
-    </div>
           <div className="notification-icon">
-            <p>{currentUser?.fullName}</p>
             <i className="fa fa-bell"></i>
           </div>
           <div className="user-photo">

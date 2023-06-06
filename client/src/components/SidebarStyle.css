@@ -1,26 +1,50 @@
 .sidebar-container {
     width: 210px;
     height: 100vh; /* Set the desired height for the sidebar */
-    border-right: 1px solid #CCCCCC;
-    background-color: #f2f2f2;
+    border: 2px solid #d4d4d4;
+    background-color: #fdfbfb;
     padding-left: 0px;
-    
+    justify-content: space-around;
+    border-radius: 20px;
+    margin-top: 20px;
   }
   
   .sidebar {
-    background-color: #f2f2f2;
+    background-color: #fdfbfb;
+    border-radius: 20px;
+    
   }
   .sidebar-menu {
     align-items: center;
     justify-content: center;
     list-style-type: none;
-    padding: 0;
-    margin: 0;
+    padding: 10px;
+    justify-content: space-around;
+    margin: 7px;
   }
   .menu-item {
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    row-gap: 20px;
     padding: 10px;
     cursor: pointer;
   }
   .menu-item:hover {
+    width: 100%;
     background-color: #e0e0e0;
+  }
+  .sidebar-menu li {
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .sidebar-menu li i {
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  .icon {
+    color: #034346;
   }

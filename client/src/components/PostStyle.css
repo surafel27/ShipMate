@@ -11,7 +11,7 @@
       justify-content: center;
       margin: 0 auto;
       padding: 30px;
-      width: 800px;
+      width: 60%;
       border-radius: 10px;
       margin-top: -600px;
       margin-bottom: 20px;
@@ -23,15 +23,17 @@
       justify-content: space-between;
   }
     .search-input {
-      display: flex;
       position: relative;
       margin: 0 auto;
       width: 800px;
       margin-bottom: 30px;
+      margin-top: -580px;
+      gap: 20px;
     }
     .search-form {
-      display: flex;
-      flex-direction: column;
+      
+      position: relative;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
       width: 100%;
@@ -39,12 +41,17 @@
       border-radius: 5px;
     } 
     .search-form input {
-      display: flex;
-      width: 100%;
+      width: 90%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 3px;
       font-size: 16px;
+    }
+    .search-btn{
+      border: 1px solid #e6e3e3;
+      background-color: rgb(6, 94, 97);
+      color: rgb(255, 255, 255);
+      text-align: center;
     }
     .home {
         display: flex;
@@ -52,20 +59,19 @@
         align-items: center;
         justify-content: center;
         margin: 0 auto;
-        margin-top: -550px;
-        
+        width: 60%;
     }
     .package-card {
-      border: 1px solid #ccc; 
+      background-color: white;
       width: 800px;
       margin: 0 auto;
-      border-radius: 5px;
     }
     .post:hover {
         background: #eeeded;
-      cursor: pointer; 
+        cursor: pointer; 
     }
     .user-header{
+      border: 1px solid #ccc; 
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid #a19e9e;
@@ -82,6 +88,7 @@
     }
     .package-destination {
       justify-content: flex-start;
+      border: 1px solid #ccc; 
       text-align: left;
       padding-left: 20px;
       padding: 10px;
@@ -148,4 +155,7 @@
     }
     .close:hover {
       cursor: pointer;
+    }
+    .post {
+      margin-top: 10px;
     }

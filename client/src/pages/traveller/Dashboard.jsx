@@ -1,10 +1,15 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../../context/authContext';
 import Sidebar from '../../components/Sidebar';
+import Headers from '../../components/Header';
+import Post from '../../components/Post';
 const TravellerDashboard = () => {
-    const { currentUser } = useContext(AuthContext);
+    const Header = Headers.headerDashboard
     return(
-        < Sidebar />
+        <>
+        <Header />
+       < Sidebar />
+        <Post />
+        </>
     )
 }
 export default TravellerDashboard;

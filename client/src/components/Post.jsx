@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Profile from '../assets/Profile.png';
+//import Popup from './SinglePost.jsx'
 import './PostStyle.css';
+import NewPostCard from './NewPostCard';
 
 const Post = () => {
   const posts = [
@@ -35,12 +37,31 @@ const Post = () => {
       yearToDelivery: '2023',
     },
   ];
+  const [showPopup, setShowPopup] = useState(false);
+  //const popupRef = useRef(null);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   return (
+    <>
+    <div className="search-input">
+          <form className="search-form">
+          <input placeholder="DO YOU HAVE ANY PACKAGE TO BE DELIVERD?" type="text" id="NewPackage" name="NewPackage"/>
+          <input placeholder="search for package" type="text" id="searchPackage" name="searchPackage"/>
+          <button className='search-btn'>Search</button>
+        </form>
+    </div>
     <div className="home">
       <div className="package-card">
         {posts.map((post, index) => (
-          <div className="post" key={post.postId}>
+          <div className="post" key={post.postId} onClick={togglePopup}>
+            {showPopup && (
+            <div>
+              <NewPostCard />
+              </div>
+              )}
             <div className="user-header">
               <div className="user-photo">
                 <img src={post.img} alt="User" />
@@ -63,11 +84,11 @@ const Post = () => {
               </h5>
               <p>{post.detailStory}</p>
             </div>
-            <hr />
           </div>
         ))}
       </div>
     </div>
+    </>
   );
 };
 
