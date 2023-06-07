@@ -1,16 +1,13 @@
 .destination {
-    margin: 4rem 6rem;
+    margin: 4rem 6rem; 
 }
 .destination h1 {
     font-size: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3rem;
-    font-weight: 400;
-    text-align: center;
+    letter-spacing: 0.1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500 ;
 }
-.destination p {
-    text-align: center;
-}
+
 .first-des {
    display: flex;
    align-items: center;
@@ -45,14 +42,14 @@
 }
 .image1 img{
     width: 48%;
-    height: 400px;
+    height: 500px;
     object-fit: cover;
     border-radius: 6px;
     box-shadow: -1px 1px 62px -18px rgba(0, 0, 0, 0.19);
 }
 .image1 img:nth-child(2){
     position: absolute;
-    top: -12%;
+    top: -17%;
     right: 0;
 }
 @media screen and (max-width: 850px) {

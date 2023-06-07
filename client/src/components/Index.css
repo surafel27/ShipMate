@@ -1,0 +1,189 @@
+.destination-st  {
+    margin: 4rem 6rem; 
+    margin-top: 220px;
+}
+.destinatio-st h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    font-weight: 400;
+    text-align: center;
+}
+.destinatio-st p {
+    text-align: center;
+}
+.first-des {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-top: 4.5rem; 
+}
+.first-des-reverse{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4.5rem; 
+ }
+
+.des-text{
+    width: 45%;
+    text-align: start;
+    font-size: 1.1rem;
+}
+.des-text h2{
+    padding-bottom: 1rem;
+}
+.des-text p{
+    text-align: justify;
+}
+.image1 {
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    z-index: -99;
+}
+.image1:hover {
+    transform: rotate(15%)
+}
+.image1 img{
+    width: 48%;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: -1px 1px 62px -18px rgba(255, 255, 255, 0.19);
+}
+.image1 img:nth-child(2){
+    position: absolute;
+    justify-content: space-around;
+    top: -17%;
+    right: 0;
+}
+@media screen and (max-width: 850px) {
+    .destinatio-st {
+        margin: 4rem 2rem;
+    }
+    .first-des{
+        display: flex; 
+        flex-direction: column-reverse;
+        margin-top: 2.5rem; 
+    }
+    .first-des-reverse {
+        display: flex; 
+        flex-direction: column-reverse;
+        margin-top: 2.5rem; 
+    }
+    .des-text{
+        width: 100%;
+    }
+    .image1{
+        width: 100%;
+        margin: 1.8rem 0;
+    }
+    .image1 img{
+        height: 300px;
+    }   
+}
+
+.maincontainer{
+    display: flex;
+    position: absolute;
+    width: 90%;
+    height: 320px;
+    background: none;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 200px;
+  }
+  /* THE CARD HOLDS THE FRONT AND BACK FACES */
+  .thecard{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 10px;
+    margin-bottom: 200px;
+    top: 0;
+    bottom: 200px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+    transition: all 0.8s ease;
+  }
+  
+  /* THE PSUEDO CLASS CONTROLS THE FLIP ON MOUSEOVER AND MOUSEOUT */
+  .thecard:hover{
+    transform: rotateY(180deg);
+  }
+  
+  /* THE FRONT FACE OF THE CARD, WHICH SHOWS BY DEFAULT */
+   .thefront{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    overflow: hidden;
+    background: #06458d;
+    color: #ffffff;
+  }
+  
+  /* THE BACK FACE OF THE CARD, WHICH SHOWS ON MOUSEOVER */
+  .theback{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    overflow: hidden;
+    background: #02323a;
+    color: #ffffff;
+    text-align: center;
+    transform: rotateY(180deg);
+  }
+  
+  
+  /*This block (starts here) is merely styling for the flip card, and is NOT an essential part of the flip code */
+  .thefront h1, .theback h1{
+    font-family: 'zilla slab', sans-serif;
+    padding: 30px;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .thefront p, .theback p{
+    font-family: 'zilla slab', sans-serif;
+    padding: 30px;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: center;
+  }
+
+
+  .thecard-t {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 10px;
+    margin-bottom: 200px;
+    top: 0;
+    bottom: 200px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+    transition: all 0.8s ease;
+  }
+  
+  /* THE PSUEDO CLASS CONTROLS THE FLIP ON MOUSEOVER AND MOUSEOUT */
+  .thecard-t:hover{
+    transform: translate(-5px, -10px);
+  }

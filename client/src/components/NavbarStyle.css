@@ -13,9 +13,13 @@
     transform: translate(-50%);
     z-index: 9999;
     margin-bottom: 4.5rem;
+    top: 0;
 }
 .menu-icons {
     display: none;
+}
+Link {
+    text-decoration: none;
 }
 .navbar-logo{
     text-transform: uppercase;
@@ -26,6 +30,7 @@
     font-size: 2rem;
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
 }
 .nav-menu{
     display: grid;

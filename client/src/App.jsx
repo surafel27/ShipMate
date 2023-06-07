@@ -8,6 +8,8 @@ import Identity from "./pages/Identity.jsx";
 import SenderDashboard from "./pages/sender/Dashboard.jsx";
 import TravellerDashboard from "./pages/traveller/Dashboard.jsx";
 import PhoneIdentity from "./pages/PhoneVerification.jsx"
+import Indexsender from "./pages/sender/Index.jsx"
+import Indextraveller from "./pages/traveller/Index.jsx"
 
 const SenderIdentity = Identity.sender;
 const TravellerIdentity = Identity.traveller;
@@ -72,7 +74,16 @@ const router = createBrowserRouter([
   {
     path: "/user/account/traveller/mobile/verify",
     element: <TravellerMobileIdentity />
-  }
+  },
+  {
+    path: "/personal",
+    element: <Indexsender />
+  },
+  {
+    path: "/traveller",
+    element: <Indextraveller />
+  },
+  
 
 
 ]);

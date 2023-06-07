@@ -7,7 +7,7 @@ export const MenuItems = [
     },
     {
         title : "PERSONAL",
-        url : "/about",
+        url : "/personal",
         cName : "nav-links",
         icon: "fa-solid fa-person-walking-luggage"
     },
