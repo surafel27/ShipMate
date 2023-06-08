@@ -8,7 +8,7 @@ const  Hero = (props) => {
         <div className="background-texture"></div>
         <header className="header">
             <div className="left-content">
-                <p className="stay-home">Stay Home!!</p>
+                <p className="stay-home">Stay Home!!!</p>
                 <h2>Send your items swiftly and safely</h2>
                 <p></p>
                 <p className="para">
