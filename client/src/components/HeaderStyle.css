@@ -3,6 +3,7 @@ header {
 	height: 80px;
 	border-bottom: 1px solid #CCCCCC;
   margin-top: -20px;
+  z-index: 100;
   
 }
 .non-fixed-header h1 {

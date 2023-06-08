@@ -37,31 +37,31 @@ const Post = () => {
       yearToDelivery: '2023',
     },
   ];
-  const [showPopup, setShowPopup] = useState(false);
-  //const popupRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const togglePopup = () => {
-    setShowPopup(!showPopup);
+    setIsOpen(!isOpen);
   };
 
   return (
     <>
     <div className="search-input">
-          <form className="search-form">
-          <input placeholder="DO YOU HAVE ANY PACKAGE TO BE DELIVERD?" type="text" id="NewPackage" name="NewPackage"/>
-          <input placeholder="search for package" type="text" id="searchPackage" name="searchPackage"/>
+          <div className="search-form">
+          <input onClick={togglePopup} placeholder="DO YOU HAVE ANY PACKAGE TO BE DELIVERD?" type="text" id="NewPackage" name="NewPackage"/>
+            {isOpen && (
+            <div>
+              <NewPostCard isOpen={isOpen} togglePopup={togglePopup} />
+              </div>
+              )}
+        <input placeholder="search for package" type="text" id="searchPackage" name="searchPackage"/>
           <button className='search-btn'>Search</button>
-        </form>
+        </div>
     </div>
     <div className="home">
       <div className="package-card">
         {posts.map((post, index) => (
-          <div className="post" key={post.postId} onClick={togglePopup}>
-            {showPopup && (
-            <div>
-              <NewPostCard />
-              </div>
-              )}
+          <div className="post" key={post.postId}>
+            
             <div className="user-header">
               <div className="user-photo">
                 <img src={post.img} alt="User" />

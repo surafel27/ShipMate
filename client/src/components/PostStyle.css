@@ -29,6 +29,7 @@
       margin-bottom: 30px;
       margin-top: -580px;
       gap: 20px;
+      z-index: 99;
     }
     .search-form {
       position: relative;
@@ -40,17 +41,21 @@
       border-radius: 5px;
     } 
     .search-form input {
-      width: 90%;
+      width: 82%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 3px;
       font-size: 16px;
+      margin: 10px;
     }
     .search-btn{
+      width: 80px;
+      height: 40px;
       border: 1px solid #e6e3e3;
       background-color: rgb(6, 94, 97);
       color: rgb(255, 255, 255);
       text-align: center;
+      border-radius: 10px;
     }
     .home {
         display: flex;

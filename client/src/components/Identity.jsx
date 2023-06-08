@@ -19,7 +19,7 @@ setInputs(prev=>({ ...prev, [e.target.name]: e.target.value}))
 const handleSubmitt = async (e) => {
 e.preventDefault()
 try {
-  loginSender(inputs);
+ await loginSender(inputs);
   navigate('/user/account/sender/dashboard')
 } catch(err) {
     setError(err.response.data)
@@ -56,7 +56,7 @@ const handleSubmitt = async (e) => {
 e.preventDefault()
 try {
   //await Axios.post("http://localhost:8800/api/traveller/login", inputs)
-  loginTraveller(inputs);
+  await loginTraveller(inputs);
   navigate('/user/account/traveller/dashboard')
 } catch(err) {
     setError(err.response.data)

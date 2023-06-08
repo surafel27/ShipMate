@@ -5,7 +5,7 @@ const config = require("../config/main.config.js");
 const { post } = require("../routes/senderRoute.js");
 
 const addPackage = (req, res) => {
-    const token = req.cookie.access_token
+    const token = req.cookie.access_token;
     if (!token) return res.status(401).json(" user Not Logge In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
@@ -28,15 +28,15 @@ const addPackage = (req, res) => {
             if (err) {
                 return res.status(500).json(err);
             }
-            console.log("user created!")
-            return res.status(200).json("User has been created");
+            console.log("package add created!")
+            return res.status(200).json("package has been created");
         });
 });
 }
 
 
 const getPackages = (req, res) => {
-    const token = req.cookie.access_token
+    const token = req.cookies.access_token;
     if (!token) return res.status(401).json(" user Not Logge In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {

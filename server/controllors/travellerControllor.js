@@ -42,12 +42,9 @@ const register = (req, res) => {
             const token = jwt.sign({ userId: values.userId }, config.jwtSecret);
             const {hashedPassword, ...other} = values;
     
-            res
-              .cookie("access_token", token, {
+            res.cookie("access_token", token, {
                 httpOnly:true,
-            })
-              .status(200)
-              .json(other);
+            }).status(200).json(other);
             console.log("user created!")
             return res.status(200).json("User has been created");
         });
@@ -104,7 +101,7 @@ const login = (req, res) => {
         const token = jwt.sign({ userId: data[0].userId }, config.jwtSecret);
         const {password, ...other} = data[0];
 
-        res.cookie("access_token", token, {
+       return res.cookie("access_token", token, {
             httpOnly:true,
         }).status(200).json(other);
     });
