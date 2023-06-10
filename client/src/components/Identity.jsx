@@ -10,30 +10,32 @@ function SenderIdentityForm() {
     password: "",
 });
 const [err, setError] = useState(null)
-const navigate = useNavigate()
+const navigate = useNavigate();
 const { loginSender } = useContext(AuthContext)
+
 const handleChange = e =>{
 setInputs(prev=>({ ...prev, [e.target.name]: e.target.value}))
 }
 
-const handleSubmitt = async (e) => {
+const handleSubmit = async (e) => {
 e.preventDefault()
 try {
- await loginSender(inputs);
-  navigate('/user/account/sender/dashboard')
+  //await Axios.post("http://localhost:8800/api/traveller/login", inputs)
+  await loginSender(inputs);
+  navigate('/user/account/traveller/dashboard')
 } catch(err) {
-    setError(err.response.data)
+  setError(err.response.data)
 }
 }
   return (
     <div className="identity-form-container">
-    <form onSubmit={handleSubmitt} className="identity-form">
+    <form  className="identity-form">
       <h2>Sender Sign In</h2>
       <p>Welcome to Shipmate! Sign in with your email and password below.</p>
       {err && <p className='err'>{err}</p>}
-      <input placeholder="Email Adress" type="email" id="email" name="email" onChange={handleChange} />
-      <input placeholder="Password" type="password" id="password" name="password" onChange={handleChange} />
-      <Link className="formButton"><button>Sign In</button></Link>
+      <input placeholder="Email Adress" type="email" required id="email" name="email" onChange={handleChange} />
+      <input placeholder="Password" type="password" required id="password" name="password" onChange={handleChange} />
+      <Link onClick={handleSubmit} className="formButton">Sign In</Link>
       <p>New To Shipmate?<Link to="/account/sender/signupSender" className='crt-link'>Create An Account!</Link></p>
     </form>
     </div>
@@ -59,7 +61,7 @@ try {
   await loginTraveller(inputs);
   navigate('/user/account/traveller/dashboard')
 } catch(err) {
-    setError(err.response.data)
+  setError(err.response.data)
 }
 }
   return (

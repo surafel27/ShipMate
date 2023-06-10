@@ -35,8 +35,7 @@ const register = (req, res) => {
             isVerifyed,
             createdAt,
         ];
-        db.query(q, [values], (err, data) => {
-          console.log(data[0].userId)
+        db.query(q, [...values], (err, data) => {
             if (err) return res.status(500).json({message: "Failed To Create Account!"});
             const token = jwt.sign({ userId: values.userId }, config.jwtSecret);
             const {hashedPassword, ...other} = values;
@@ -44,11 +43,12 @@ const register = (req, res) => {
             res
               .cookie("access_token", token, {
                 httpOnly:true,
+                expires: new Date(Date.now() + 24 * 3600000)
             })
               .status(200)
               .json(other);
               console.log("user created!")
-            return res.status(200).json("User has been created");
+            return res.status(200).json(other);
         });
     }); 
 }
@@ -87,24 +87,25 @@ const verifyPhone = (req, res) => {
 };
 
 const login = (req, res) => {
-  if(!req.body.email || !req.body.password) {
-    return res.status(404).json("Please Enter Email and Passweord!")
-  }
     //check if user exist
     const q = "SELECT * FROM user_sender WHERE email = ?";
-    
     db.query(q, [req.body.email], (err, data) => {
         if (err) return res.json(err);
         if (data.length === 0) return res.status(404).json("user not found");
-        //if (data[0].isVerifyed === 'false') return res.status(400).json("You are not verifyed");
+        //if (data[0].isVerifyed === 'false') return res.status(400).json("You'r account not verifyed");
         //check password
         const isPasswordCorrect = bcrypt.compare(req.body.password, data[0].password);
-        if (!isPasswordCorrect) return res.status(400).json("Wrong username or password");
-       console.log(data[0].userId);
-        const token = jwt.sign({ userId: data[0].userId }, config.jwtSecret);
-        const {password, ...other} = data[0];
-
-        res.cookie("access_token", token, { httpOnly:true}).status(200).json(other);});
+        if (!isPasswordCorrect) {
+            return res.status(400).json("Wrong username or password");
+        } else {
+            const token = jwt.sign({ userId: data[0].userId }, config.jwtSecret);
+            const {password, ...other} = data[0];
+    
+           return res.cookie("access_token", token, {
+                httpOnly:true,
+            }).status(200).json(other);
+        }
+    });
     
 };
 

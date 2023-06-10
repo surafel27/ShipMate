@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="top">
                 <div className='web-name'>
                     <h1>SHIPMATE</h1>
-                    <p>Stay Home!!</p>
+                    <p>Deliver Package and Make Money On The way!</p>
                 </div>
                 <div>
                     <a href="/">
@@ -26,28 +26,28 @@ const Footer = () => {
             </div>
             <div className="bottom">
                 <div>
-                  <h4>Projects</h4>
-                   <a href="/">Changelog</a>
-                   <a href="/">Status</a>
-                   <a href="/">Licence</a>
-                   <a href="/">All Version</a>
+                  <h4>About</h4>
+                   <a href="/">About Us</a>
+                   <a href="/">Features</a>
+                   <a href="/">News</a>
+                   <a href="/">Map</a>
                 </div>
                 <div>
-                  <h4>Projects</h4>
-                   <a href="/">Changelog</a>
-                   <a href="/">Status</a>
-                   <a href="/">Licence</a>
-                   <a href="/">All Version</a>
+                  <h4>Company</h4>
+                   <a href="/">Why Shipmate?</a>
+                   <a href="/">Partener With Us</a>
+                   <a href="/">FAQ</a>
+                   <a href="/">Blog</a>
                 </div>
                 <div>
-                  <h4>Projects</h4>
-                   <a href="/">Changelog</a>
-                   <a href="/">Status</a>
-                   <a href="/">Licence</a>
-                   <a href="/">All Version</a>
+                  <h4>Support</h4>
+                   <a href="/">Account</a>
+                   <a href="/">Support Center</a>
+                   <a href="/">Contact Us</a>
+                   <a href="/">Acesseblity</a>
                 </div>
                 <div>
-                  <h4>Projects</h4>
+                  <h4>Developers</h4>
                    <a href="/">Changelog</a>
                    <a href="/">Status</a>
                    <a href="/">Licence</a>

@@ -3,24 +3,25 @@ const { v4: uuidv4} = require("uuid");
 const jwt = require("jsonwebtoken");
 const config = require("../config/main.config.js");
 const { post } = require("../routes/senderRoute.js");
+const moment = require("moment");
 
 const addPackage = (req, res) => {
-    const token = req.cookie.access_token;
-    if (!token) return res.status(401).json(" user Not Logge In!");
+    const token = req.cookies.access_token;
+    if (!token) return res.status(401).json("user Not Logge In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
         if(err) return res.status(403).json("Token is not valid");
         const userId = userInfo.userId;
         const packageId = uuidv4();
-        const createdAt = new Date().toISOString();
+        const createdAt = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
         const q = "INSERT INTO package (packageId, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice, userId, created_at) VALUES (?,?,?,?,?,?,?,?,?,?)";
-             
+            console.log(req.body.packageWeight) 
         db.query(q, [packageId,
             req.body.packageFrom,
             req.body.packageTo,
             req.body.packageWeight,
             req.body.packageCat,
-            req.body.packageDate,
+            req.body.packageDeliveryDate,
             req.body.packageDesc,
             req.body.packagePrice,
             userId,
@@ -29,7 +30,7 @@ const addPackage = (req, res) => {
                 return res.status(500).json(err);
             }
             console.log("package add created!")
-            return res.status(200).json("package has been created");
+            return res.status(200).json({messag: "package has been created"});
         });
 });
 }
@@ -52,7 +53,7 @@ const getPackages = (req, res) => {
 }
 
 const singlePackage = (req, res) => {
-    const token = req.cookie.access_token
+    const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logged In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
@@ -69,7 +70,7 @@ const singlePackage = (req, res) => {
 
 }
 const myPackage = (req, res) => {
-    const token = req.cookie.access_token
+    const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logged In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
@@ -89,7 +90,7 @@ const myPackage = (req, res) => {
 
 
 const updatePackage= (req, res) => {
-    const token = req.cookie.access_token
+    const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logged In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
@@ -112,7 +113,7 @@ const updatePackage= (req, res) => {
 
 
 const deletePackage = (req, res) => {
-    const token = req.cookie.access_tooken
+    const token = req.cookies.access_tooken
     if (!token) return res.status(401).json(" user Not Logge In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {

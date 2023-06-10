@@ -10,5 +10,4 @@ router.post('/logout', travellerControllor.logout);
 
 
 
-
 module.exports = router;

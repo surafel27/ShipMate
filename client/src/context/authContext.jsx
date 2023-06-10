@@ -9,11 +9,13 @@ export const AuthContexProvider = ({ children }) => {
   );
 
   const loginSender = async (inputs) => {
-    const res = await axios.post("http://localhost:8800/api/sender/login", inputs);
+    const res = await axios.post("http://localhost:8800/api/sender/login", inputs,
+    {withCredentials: true});
     setCurrentUser(res.data);
   };
   const loginTraveller = async (inputs) => {
-    const res = await axios.post("http://localhost:8800/api/traveller/login", inputs);
+    const res = await axios.post("http://localhost:8800/api/traveller/login", inputs,
+    {withCredentials: true});
     setCurrentUser(res.data);
   };
 

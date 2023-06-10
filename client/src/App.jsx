@@ -10,6 +10,7 @@ import TravellerDashboard from "./pages/traveller/Dashboard.jsx";
 import PhoneIdentity from "./pages/PhoneVerification.jsx"
 import Indexsender from "./pages/sender/Index.jsx"
 import Indextraveller from "./pages/traveller/Index.jsx"
+import Subscribe from "./components/Subscribe.jsx";
 
 const SenderIdentity = Identity.sender;
 const TravellerIdentity = Identity.traveller;
@@ -23,6 +24,7 @@ const Layout = () => {
     <>
       <Navbar />
       <Outlet />
+      <Subscribe />
       <Footer />
     </>
   );

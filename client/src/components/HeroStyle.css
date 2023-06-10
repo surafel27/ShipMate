@@ -100,3 +100,12 @@
       transform: translateY(-15px);
     }
   }
+  @media screen and (max-width:850px){
+    .left-content {
+      margin: 4rem 2rem;
+      margin-top: 3rem;
+    }
+    .right-content img {
+      margin: 4rem 2rem;
+    }
+}
