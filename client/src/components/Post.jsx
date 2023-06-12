@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import Profile from '../assets/Profile.png';
+import Profile from '../assets/profile.png';
 //import Popup from './SinglePost.jsx'
 import './PostStyle.css';
 import NewPostCard from './NewPostCard';
@@ -136,8 +136,8 @@ const PostTraveller = () => {
   return (
     <>
     <div className="search-input">
-          <div className="search-form">
-        <input placeholder="search for package" type="text" id="searchPackage" name="searchPackage"/>
+        <div className="search-form">
+          <input placeholder="search for package" type="text" id="searchPackage" name="searchPackage"/>
           <button className='search-btn'>Search</button>
         </div>
     </div>
