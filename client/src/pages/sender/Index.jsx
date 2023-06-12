@@ -39,6 +39,13 @@ const Indexsender = () => {
         text2:"Your use of this site is subject to the terms and conditions governing this and all transactions."
 
       },
+      {
+        heading1:"Front of card",
+        heading2:"Back of Card",
+        text1:"This is the front of the card. It contains important information. Please see overleaf for more details.",
+        text2:"Your use of this site is subject to the terms and conditions governing this and all transactions."
+
+      },
     ];
     return (
         <>
