@@ -8,14 +8,14 @@ const Indexsender = () => {
     const items = [
         {
             className: "first-des",
-            heading : "Lorem Ipsum",
-            text : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sstandard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        },
+            heading : "Shipmate - Ship Your Packages with Ease!",
+            text : " Send your packages securely and conveniently with Shipmate. Our platform connects you with trusted travellers who are heading to your desired destination. Simply create a package request, specify the delivery details, and choose a traveller who can deliver it for you. Shipmate ensures reliable and cost-effective package delivery, making it hassle-free for senders like you."
+          },
         {
             className:"first-des-reverse",
-            heading : "Lorem Ipsum",
-            text : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sstandard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        },
+            heading : "Shipmate - Ship Your Package with Swiftly!",
+            text : "Send your packages securely and conveniently with Shipmate. Our platform connects you with trusted travellers who are heading to your desired destination. Simply create a package request, specify the delivery details, and choose a traveller who can deliver it for you. Shipmate ensures reliable and cost-effective package delivery, making it hassle-free for senders like you."
+          },
 
     ];
     const cardItems = [
@@ -69,6 +69,7 @@ const Indexsender = () => {
       <div className="thecard">
         <div className="thefront"><h1>{cardItem.heading1}</h1><p>{cardItem.text1}</p></div>
         <div className="theback"><h1>{cardItem.heading1}</h1><p>{cardItem.text2}</p></div>
+        <div className='mg-bt'></div>
       </div>
         ))}
       </div>

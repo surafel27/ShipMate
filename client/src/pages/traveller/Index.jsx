@@ -5,7 +5,7 @@ const Indextraveller = () => {
     const items = [
         {
             className:"first-des-reverse",
-            heading : "Lorem Ipsum",
+            heading : "Are You Planning To Travell?",
             text : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sstandard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
            img1:"https://plus.unsplash.com/premium_photo-1670844568516-70751ae08b43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
            img2:"https://plus.unsplash.com/premium_photo-1670844568516-70751ae08b43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
@@ -13,9 +13,9 @@ const Indextraveller = () => {
         },
         {
             className: "first-des",
-            heading : "Lorem Ipsum",
-            text : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sstandard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-           img1:"https://plus.unsplash.com/premium_photo-1670844568516-70751ae08b43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
+            heading : "Shipmate - Earn While You Travel!",
+            text : "Turn your travels into rewarding opportunities with Shipmate. As a traveller, you can make money by delivering packages for others who need them transported to your destination. Connect with senders looking for reliable travellers and earn extra income along your journey. Shipmate provides a safe and convenient way to monetize your trips while helping people get their packages delivered efficiently.",
+            img1:"https://plus.unsplash.com/premium_photo-1670844568516-70751ae08b43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
            img2:"https://plus.unsplash.com/premium_photo-1670844568516-70751ae08b43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
 
         },
@@ -72,6 +72,7 @@ const Indextraveller = () => {
       <div className="thecard-t">
         <div className="thefront"><h1>{cardItem.heading1}</h1><p>{cardItem.text1}</p></div>
         <div className="theback"><h1>{cardItem.heading2}</h1><p>{cardItem.text2}</p></div>
+        <div className='mg-bt'></div>
       </div>
         ))}
       </div>

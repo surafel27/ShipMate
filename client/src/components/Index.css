@@ -95,6 +95,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     margin-top: 200px;
+    
   }
   /* THE CARD HOLDS THE FRONT AND BACK FACES */
   .thecard{
@@ -102,10 +103,6 @@
     justify-content: space-between;
     position: relative;
     margin: 10px;
-    margin-bottom: 200px;
-    top: 0;
-    bottom: 200px;
-    left: 0;
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -165,14 +162,12 @@
     font-size: 12px;
     text-align: center;
   }
-
-
+/* card in traveller */
   .thecard-t {
     display: flex;
     justify-content: space-between;
     position: relative;
     margin: 10px;
-    margin-bottom: 200px;
     top: 0;
     bottom: 200px;
     left: 0;
@@ -187,9 +182,6 @@
   .thecard-t:hover{
     transform: translate(-5px, -10px);
   }
-
-
-
 
   /* Subscribe section */
   .container-sub {
@@ -221,6 +213,7 @@
     background-color: none;
     border: 1px solid #ccc;
     box-shadow: 0px 0px 10px #ccc;
+    text-align: center;
   }
   .form-sub button {
     background-color: #023d3d;
@@ -231,12 +224,14 @@
     border: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: bold ;
-    
   }
   .form-sub button:hover {
     background-color: #01959a;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+  }
+  .mg-bt {
+    margin: 20%;
   }
   @media screen and (max-width:850px){
     .container-sub {

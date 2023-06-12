@@ -81,7 +81,7 @@ transform: translate(-5px, -10px);
     justify-self: center;
 }
 .r-card-btn button:hover{
-    background-color: whitesmoke;
+    background-color: rgb(42, 233, 17);
     color: black;
 }
 @media screen and (max-width:850px){

@@ -1,6 +1,7 @@
 import React from 'react';
 import "./HeroStyle.css"
 import HeroImg from "../assets/hero.svg"
+import { Link } from 'react-router-dom';
 const  Hero = (props) => {
     return(
         <>
@@ -15,7 +16,9 @@ const  Hero = (props) => {
                     That's what we need right now. Lorem ipsum dolor sit amet consectetur,
                     adipisicing elit. Aliquam, corporis.
                 </p>
+            <Link to="/account/login">
                 <button className="hero-btn">Get Started</button>
+            </Link>
             </div>
             <div className='right-content'>
                 <img src={HeroImg} alt="" />
