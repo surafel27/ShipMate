@@ -5,12 +5,12 @@ import Post from '../../components/Post';
 
 const SenderDashboard = () => {
     const Header =Headers.headerDashboard
-    
+    const PostSender = Post.sender;
     return (
         <>
          <Header />
         < Sidebar />
-         <Post />
+         <PostSender />
          </>
     )
 }

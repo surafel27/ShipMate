@@ -22,7 +22,7 @@ e.preventDefault()
 try {
   //await Axios.post("http://localhost:8800/api/traveller/login", inputs)
   await loginSender(inputs);
-  navigate('/user/account/traveller/dashboard')
+  navigate('/user/account/sender/dashboard')
 } catch(err) {
   setError(err.response.data)
 }

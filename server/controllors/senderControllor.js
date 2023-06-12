@@ -3,9 +3,11 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const { v4: uuidv4} = require("uuid");
 const config = require("../config/main.config.js")
+const phoneVerify = require('../utlis/phoneVerification.js') 
 
 const register = (req, res) => {
     //check if user exist
+    const phoneNumber = req.body.phoneNumber;
     const qu = "SELECT * FROM user_sender WHERE email = ? or phoneNumber = ?";
     db.query(qu, [req.body.email, req.body.phoneNumber], (err, data) => {
         if(err) return res.json(err)
@@ -37,25 +39,32 @@ const register = (req, res) => {
         ];
         db.query(q, [...values], (err, data) => {
             if (err) return res.status(500).json({message: "Failed To Create Account!"});
-            const token = jwt.sign({ userId: values.userId }, config.jwtSecret);
-            const {hashedPassword, ...other} = values;
+
+            const q = "SELECT * FROM user_sender WHERE userId = ?";
+            db.query(q, [userId], (err, data) => {
+                if (err) return res.json(err);
+                if (data.length === 0) return res.status(404).json("user not found");
+
+                const token = jwt.sign({ userId: data[0].userId }, config.jwtSecret);
+                const {hashedPassword, ...other} = values;
     
             res
               .cookie("access_token", token, {
                 httpOnly:true,
-                expires: new Date(Date.now() + 24 * 3600000)
             })
               .status(200)
               .json(other);
+              console.log(token);
+              phoneVerify.sendVerificationCode(phoneNumber, verificationCode);
+        });
               console.log("user created!")
-            return res.status(200).json(other);
+           
         });
     }); 
 }
-
 const verifyPhone = (req, res) => {
     //check if the user signed up by looking if these is a cookie 
-    const token = req.cookie.access_token
+    const token = req.cookies.access_token
     if (!token) return res.status(401).json("user not sign up");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
@@ -71,7 +80,7 @@ const verifyPhone = (req, res) => {
         if (data[0].isVerifyed === true) return res.status(404).json("User already verifyed!");
         const storedCode = data[0].verificationCode
         if (req.body.verificationCode === storedCode) {
-          const q = "UPDATE user_sender SET isVerifyed = true WHERE userId = ?";
+          const q = "UPDATE user_sender SET isVerifyed = 'true' WHERE userId = ?";
           db.query(q, [userInfo.userId], (err, data) => {
             if (err) return res.json(err);
             if (data.length) return res.status(200).json("User has been verifyed");
@@ -83,7 +92,7 @@ const verifyPhone = (req, res) => {
   res.clearCookie("access_token", {
     sameSite: "none",
     secure: true
-   }).status(200).json("user hasbeen logged out") 
+   }).status(200).json("user has been redirects to login!") 
 };
 
 const login = (req, res) => {
@@ -92,7 +101,7 @@ const login = (req, res) => {
     db.query(q, [req.body.email], (err, data) => {
         if (err) return res.json(err);
         if (data.length === 0) return res.status(404).json("user not found");
-        //if (data[0].isVerifyed === 'false') return res.status(400).json("You'r account not verifyed");
+        if (data[0].isVerifyed === 'false') return res.status(400).json("You'r account not verifyed");
         //check password
         const isPasswordCorrect = bcrypt.compare(req.body.password, data[0].password);
         if (!isPasswordCorrect) {

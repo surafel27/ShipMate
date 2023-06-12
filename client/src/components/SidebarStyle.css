@@ -1,6 +1,6 @@
 .sidebar-container {
     width: 210px;
-    height: 100vh; /* Set the desired height for the sidebar */
+    height: 80vh; /* Set the desired height for the sidebar */
     border: 2px solid #d4d4d4;
     background-color: #fdfbfb;
     padding-left: 0px;
@@ -45,6 +45,40 @@
     text-decoration: none;
     margin-right: 10px;
   }
-  .icon {
+  .sidebar-menu .icon {
     color: #034346;
   }
+  .sidebar-menu-small{
+    display: none;
+  }
+
+  @media screen and (max-width:850px){
+    .sidebar-container{
+      width: 50px;
+      height: 80vh;
+    }
+    .sidebar{
+      display: none;
+    }
+    .sidebar-menu-small{
+      display: block;
+      align-items: center;
+      justify-content: center;
+      list-style-type: none;
+      padding: 3px;
+      justify-content: space-around;
+      
+    }
+    .sidebar-menu-small li {
+      list-style: none;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .logout-sd {
+      margin: 7px;
+      padding: 3px;
+    }
+  }
+

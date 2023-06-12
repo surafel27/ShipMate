@@ -23,8 +23,11 @@ setInputs(prev=>({ ...prev, [e.target.name]: e.target.value}))
 const handleSubmit = async (e) => {
 e.preventDefault()
 try {
-  await Axios.post("http://localhost:8800/api/sender/register", inputs)
-  navigate('/account/Identity/sender')
+  await Axios.post("http://localhost:8800/api/sender/register", inputs, {
+    withCredentials: true
+  })
+  //navigate('/account/Identity/sender')
+  navigate('/user/account/sender/mobile/verify')
 } catch(err) {
     setError(`${err.response.data.message}`)
 }

@@ -24,8 +24,8 @@ const handleSubmitt = async (e) => {
 e.preventDefault()
 try {
   await Axios.post("http://localhost:8800/api/package/addPackage", inputs, {
-    withCredentials: true});
-  navigate('/user/account/traveller/dashboard')
+    withCredentials: true,});
+  navigate('/user/account/sender/dashboard')
 } catch(err) {
   console.log(err);
 }

@@ -19,20 +19,26 @@ export const AuthContexProvider = ({ children }) => {
     setCurrentUser(res.data);
   };
 
-  const logoutSender = async (inputs) => {
+  const logoutSender = async () => {
     await axios.post("http://localhost:8800/api/sender/logout");
     setCurrentUser(null);
   };
-  const logoutTraveller = async (inputs) => {
+  const logoutTraveller = async () => {
     await axios.post("http://localhost:8800/api/traveller/logout");
     setCurrentUser(null);
   };
+
+  const mobileVerify = async (input) => {
+    await axios.post("http://localhost:8800/api/sender/verification", input, {
+        withCredentials: true,});
+        setCurrentUser(res.data);
+  }
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, loginSender, loginTraveller, logoutSender, logoutTraveller }}>
+    <AuthContext.Provider value={{ currentUser, loginSender, loginTraveller, logoutSender, logoutTraveller, mobileVerify }}>
       {children}
     </AuthContext.Provider>
   );

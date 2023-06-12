@@ -8,3 +8,11 @@
     text-align: center;
     text-transform: uppercase;
 }
+.moving-card img {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+}
+.moving-card img:hover {
+    box-shadow: 0px 0px 10px #ccc;  
+}

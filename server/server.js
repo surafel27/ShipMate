@@ -7,6 +7,7 @@ const serverPort = config.server.port;
 const senderRoute = require("./routes/senderRoute.js");
 const travellerRoute = require("./routes/travellerRoute.js");
 const packageRoute = require("./routes/packageRoute.js");
+const verificationRoute = require("./routes/verificationRoute.js");
 
 app.use((req, res, next)=> {
     res.setHeader("Access-Control-Allow-Credentials", true)
@@ -28,6 +29,7 @@ app.use(cors({
 app.use('/api/sender', senderRoute);
 app.use('/api/traveller', travellerRoute);
 app.use('/api/package', packageRoute);
+app.use('/api/mobile', verificationRoute);
 
 
 app.listen(serverPort, () =>{

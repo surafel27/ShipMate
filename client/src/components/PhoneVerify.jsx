@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './PhoneVerifyStyle.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Axios from 'axios';
+import { AuthContext } from '../context/authContext';
 
 function SenderMobileIdentityForm() {
-    const [inputs, setInputs] = useState({
+    const [input, setInputs] = useState({
         phoneVerification: "",
     });
     const [err, setError] = useState(null)
     const navigate = useNavigate()
+    const { mobileVerify } = useContext(AuthContext)
     
     const handleChange = e =>{
     setInputs(prev=>({ ...prev, [e.target.name]: e.target.value}))
@@ -18,10 +20,10 @@ function SenderMobileIdentityForm() {
     const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await Axios.post("http://localhost:8800/api/sender/mobile/verify", inputs)
-      navigate('/account/Identity/sender')
+      await mobileVerify(input)
+      navigate('/account/Identity/sender');
     } catch(err) {
-      setError(`${err.response.data.message}`)
+      setError(err.response.data)
     }
     }
   return (
@@ -53,10 +55,10 @@ function TravellerMobileIdentityForm() {
     const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await Axios.post("http://localhost:8800/api/traveller/mobile/verify", inputs)
-      navigate('/account/Identity/traveller')
+      await Axios.post("http://localhost:8800/api/mobile/verifyTraveller", inputs);
+      navigate('/account/Identity/traveller');
     } catch(err) {
-      setError(`${err.response.data.message}`)
+      setError(err.response.data)
     }
     }
 

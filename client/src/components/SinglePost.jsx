@@ -11,8 +11,7 @@ const Popup = ({ onClose }) => {
           postTime: 'posted 1hr ago',
           packageRouteFrom: 'Addis Abab',
           packageRouteTo: 'Hawassa',
-          detailStory:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+          detailStory: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
           price: '500',
           packageWight: '10 kg',
           dateToDelivery: 'Fir',

@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import "./SidebarStyle.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 function Sidebar() {
  const SidebatItems = [
     {
@@ -32,15 +33,11 @@ function Sidebar() {
         url : "/contact",
         cName : "menu-item",
         icon : "fa-solid fa-message"
-    },
-    {
-        title : "Logout",
-        url : "/login",
-        cName : "menu-item",
-        icon : "fa-solid fa-user"
     }
 ];
 const [currentDateTime, setCurrentDateTime] = useState(new Date());
+const navigate = useNavigate();
+const { logoutSender } = useContext(AuthContext)
 
 useEffect(() => {
   const timer = setInterval(() => {
@@ -50,7 +47,16 @@ useEffect(() => {
   return () => {
     clearInterval(timer);
   };
-}, [])
+}, []);
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  try {
+    await logoutSender();
+    navigate('/account/login')
+  } catch(err) {
+    setError(err.response.data)
+  }
+  }
 const formattedDateTime = currentDateTime.toLocaleString();
   return (
     <div className="sidebar-container">
@@ -64,9 +70,34 @@ const formattedDateTime = currentDateTime.toLocaleString();
                         </Link>
                        </li>
                        
+                       
                     );
                  })}
+                 <li>
+                  <Link onClick={handleSubmit}>
+                    <i className='fa-solid fa-user'></i>Logout</Link>
+                 </li>
       <li>{formattedDateTime}</li>          
+      </ul>
+    </div>
+    <div className='sidebar-small'>
+      <ul className='sidebar-menu-small'>
+      {SidebatItems.map((item, index) =>{
+                    return (
+                        <li key ={index}>
+                        <Link className={item.cName} to={item.url}>
+                          <i className={item.icon}></i>
+                        </Link>
+                       </li>
+                       
+                       
+                    );
+                 })}
+                 <li className='logout-sd'>
+                  <Link onClick={handleSubmit}>
+                    <i className='fa-solid fa-user'></i></Link>
+                 </li>
+                 
       </ul>
     </div>
     </div>
