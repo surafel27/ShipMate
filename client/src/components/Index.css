@@ -231,7 +231,7 @@
     transition: 0.3s ease-in-out;
   }
   .mg-bt {
-    margin: 20%;
+    margin-top: 700px;
   }
   @media screen and (max-width:850px){
     .container-sub {

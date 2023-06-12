@@ -3,6 +3,7 @@ import '../../components/Index.css'
 import Navbar from '../../components/Navbar';
 import Traveller from '../../assets/traveler.svg'
 import Traveller2 from '../../assets/traveller2.svg'
+import Footer from '../../components/Footer.jsx'
 
 const Indexsender = () => {
     const items = [
@@ -69,10 +70,11 @@ const Indexsender = () => {
       <div className="thecard">
         <div className="thefront"><h1>{cardItem.heading1}</h1><p>{cardItem.text1}</p></div>
         <div className="theback"><h1>{cardItem.heading1}</h1><p>{cardItem.text2}</p></div>
-        <div className='mg-bt'></div>
       </div>
         ))}
       </div>
+      <div className='mg-bt'><p></p></div>
+      <Footer />
     </>
     );
 }

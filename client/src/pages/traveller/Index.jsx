@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../components/Index.css'
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 const Indextraveller = () => {
     const items = [
         {
@@ -76,6 +77,8 @@ const Indextraveller = () => {
       </div>
         ))}
       </div>
+      <div className='mg-bt'><p></p></div>
+      <Footer />
     </>
     );
 }
