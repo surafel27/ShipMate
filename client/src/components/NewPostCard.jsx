@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./NewPostCardStyle.css";
 import { useNavigate } from 'react-router-dom';
 import Axios from "axios";
@@ -13,8 +13,8 @@ const NewPostCard = ({ isOpen, togglePopup }) => {
     packagePrice: "",
     packageDeliveryDate: "",
 });
-
-const navigate = useNavigate
+const navigate = useNavigate();
+const [showAlert, setShowAlert] = useState(false);
 
 const handleChange = e =>{
 setInputs(prev=>({ ...prev, [e.target.name]: e.target.value}))
@@ -25,17 +25,32 @@ e.preventDefault()
 try {
   await Axios.post("http://localhost:8800/api/package/addPackage", inputs, {
     withCredentials: true,});
-  navigate('/user/account/sender/dashboard')
+    setShowAlert(true);
+  navigate('/user/account/sender/dashboard');
 } catch(err) {
   console.log(err);
 }
 }
+useEffect (() => {
+  let timeout;
+  if (showAlert) {
+    timeout = setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
+  }
+  return () => clearTimeout(timeout);
+}, [showAlert]);
     return(
       <>
       {isOpen && (
       <div className="container-post">  
     <div className="package-request">
     <form onSubmit={handleSubmitt}  className="request-form">
+    {showAlert && (
+        <div className="alert">
+          <p>Posted successfully!</p>
+        </div>
+      )}
       <input placeholder="Package From" type="text" id="packageFrom" name="packageFrom" onChange={handleChange} />
       <input placeholder="Package To" type="text" id="packageTo" name="packageTo" onChange={handleChange} />
       <input placeholder="Package wight" type="number" id="packageWeight" name="packageWeight" onChange={handleChange} />
@@ -59,6 +74,7 @@ try {
     </div>
         </div>
     )}
+    
         </>
     )
 } 

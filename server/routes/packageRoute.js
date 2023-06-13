@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/addPackage', packageControllor.addPackage);
 
-router.get('/', packageControllor.getPackages);
+router.get('/packages', packageControllor.getPackages);
 router.get('/:packageId', packageControllor.singlePackage);
 router.get('/mypackage', packageControllor.myPackage);
 

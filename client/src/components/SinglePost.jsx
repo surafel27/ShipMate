@@ -1,37 +1,41 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './SinglePostStyle.css'
 import Profile from '../assets/Profile.png';
+import axios from 'axios';
+import { Link, useLocation } from 'react-router-dom';
+import  moment from 'moment';
+import { AuthContext } from '../context/authContext';
 
-const Popup = ({ onClose }) => {
-    const posts = [
-        {
-          postId: 1,
-          img: Profile,
-          fullName: 'Surafel Fekadu Megiso',
-          postTime: 'posted 1hr ago',
-          packageRouteFrom: 'Addis Abab',
-          packageRouteTo: 'Hawassa',
-          detailStory: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-          price: '500',
-          packageWight: '10 kg',
-          dateToDelivery: 'Fir',
-          monthToDelivery: 'May',
-          yearToDelivery: '2023',
-        }
-      ];
+const Single = () => {
+  const [post, setPost] = useState ([]);
+  const location = useLocation();
+  const {currentUser} = useContext(AuthContext);
+  const packageId = location.pathname.split("/")[2];
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const res = await axios.get(`http://localhost:8800/api/package/${packageId}`, {
+          withCredentials: true,
+        });
+        setPost(res.data);
+      } catch(err) {
+        console.log(err)
+      }
+    };
+    fetchData();
+  }, [packageId]);
+
   return (
     <div className="popup-container">
       <div className="popup-content">
-        <button className='close' onClick={onClose}>X</button>
       </div>
       <div className="package-card">
-        {posts.map((post, index) => (
-          <div className="post" key={post.postId}>
+          <div className="post">
             <div className="user-header">
               <div className="user-photo">
-                <img src={post.img} alt="User" />
+                <img src={Profile} alt="User" />
                 <h3>{post.fullName}</h3>
-                <p>{post.postTime}</p>
+                <p>Posted {moment(post.createdAt).fromNow()}</p>
               </div>
               <div className="card-icon">
                 <div className="filter">
@@ -41,22 +45,28 @@ const Popup = ({ onClose }) => {
             </div>
             <div className="package-destination">
               <h3>
-                Package Route [{post.packageRouteFrom} - {post.packageRouteTo}]
+                Package Route [{post.packageFrom} - {post.packageTo}]
               </h3>
               <h5>
-                Fixed-Price: {post.price} birr | Package-Wight: {post.packageWight} | Date:{' '}
-                {post.dateToDelivery}, {post.monthToDelivery}, {post.yearToDelivery}
+                Fixed-Price: {post.packagePrice} birr | Package-Wight: {post.packageWeight} | Date:{post.packageDate}
               </h5>
-              <p>{post.detailStory}</p>
+              <p>{post.packageDesc}</p>
             </div>
             <hr />
           </div>
-        ))}
         <div className='post-btn'>
         <button>SEND PROPOSAL</button>
         </div>
+        {currentUser.fullName === post.fullName &&
+        <div className='edit'>
+          <Link to={`/write?edit=2`} >
+            <button>Edit</button>
+          </Link>
+          <button className='btn-danger'>Delete</button>
+        </div>
+        }
       </div>
     </div>
   );
 };
-export default Popup;
+export default Single;

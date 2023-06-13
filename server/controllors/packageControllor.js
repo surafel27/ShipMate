@@ -15,7 +15,6 @@ const addPackage = (req, res) => {
         const packageId = uuidv4();
         const createdAt = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
         const q = "INSERT INTO package (packageId, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice, userId, created_at) VALUES (?,?,?,?,?,?,?,?,?,?)";
-            console.log(req.body.packageWeight) 
         db.query(q, [packageId,
             req.body.packageFrom,
             req.body.packageTo,
@@ -36,15 +35,24 @@ const addPackage = (req, res) => {
 }
 
 
+
 const getPackages = (req, res) => {
+        const q = "SELECT * FROM package"; 
+        db.query(q, (err, data) => {
+           if (err) return res.json(err);
+           return res.status(200).json(data);
+    });
+}
+
+const getPackage = (req, res) => {
     const token = req.cookies.access_token;
     if (!token) return res.status(401).json(" user Not Logge In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
         if(err) return res.status(403).json("Token is not valid");
 
-        const q = req.query.cat ? "SELECT * FROM package WHERE cat = ?" : "SELECT * FROM package"; 
-        db.query(q, [req.query.cat], (err, data) => {
+        const q = req.query.cat ? "SELECT * FROM package WHERE packageCat = ?" : "SELECT * FROM package"; 
+        db.query(q, [req.query.packageCat], (err, data) => {
            if (err) return res.json(err);
            
            return res.status(200).json(data);
@@ -55,17 +63,17 @@ const getPackages = (req, res) => {
 const singlePackage = (req, res) => {
     const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logged In!");
+   console.log(token);
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
         if(err) return res.status(403).json("Token is not valid");
 
-        const q = "SELECT fullName, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice, FROM  user_sender u JOIN package p ON u.userId=p.userId WHERE P.packageId = ?";
+        const q = "SELECT fullName, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice, p.createdAt FROM  user_sender u JOIN package p ON u.userId=p.userId WHERE p.packageId = ?";
         db.query(q, [req.params.packageId], (err, data) => {
             if (err) return res.status(403).json("No package with these Id");
 
             return res.status(200).json(data[0]);
         });
-
     });
 
 }
@@ -135,6 +143,7 @@ const deletePackage = (req, res) => {
 module.exports = {
     addPackage,
     getPackages,
+    getPackage,
     singlePackage,
     myPackage,
     updatePackage,

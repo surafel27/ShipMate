@@ -166,6 +166,9 @@
     .close:hover {
       cursor: pointer;
     }
+    .link {
+      text-decoration: none;
+    }
     @media screen and (max-width:850px){
       .home {
         max-width: 500px;
