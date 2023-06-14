@@ -3,7 +3,9 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const { v4: uuidv4} = require("uuid");
 const config = require("../config/main.config.js")
+const moment = require("moment");
 
+//add traveller
 const register = (req, res) => {
 
     //check if user exist
@@ -18,12 +20,7 @@ const register = (req, res) => {
         const userId = uuidv4();
         const verificationCode = Math.floor(100000 + Math.random() * 900000);
         const isVerifyed = 'false';
-        const ts = Date.now();
-        const date_time = new Date(ts);
-        const date = date_time.getDate();
-        const month = date_time.getMonth();
-        const year = date_time.getFullYear();
-        const createdAt = date + "-" + month + "-" + year;
+        const createdAt = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
         const q = "INSERT INTO user_traveller(userId, fullName, email, phoneNumber, password, verificationCode, isVerifyed, created_at) VALUES (?,?,?,?,?,?,?,?)";
         const values = [
             userId,
@@ -39,19 +36,14 @@ const register = (req, res) => {
             if (err) {
                 return res.status(500).json({message: "Failed To Create Account!"});
             }
-            const token = jwt.sign({ userId: values.userId }, config.jwtSecret);
-            const {hashedPassword, ...other} = values;
-    
-            res.cookie("access_token", token, {
-                httpOnly:true,
-            }).status(200).json(other);
+            
             console.log("user created!")
             return res.status(200).json("User has been created");
         });
     }); 
 }
 
-
+//verify travellers phone
 const verifyPhone = (req, res) => {
     //check if the user signed up by looking if these is a cookie 
     const token = req.cookie.access_token
@@ -107,14 +99,13 @@ const login = (req, res) => {
     });
     
 };
+//logout from the system
 const logout = (req, res) => {
     res.clearCookie("access_token", {
         sameSite: "none",
         secure: false
     }).status(200).json("user has been logged out")
 };
-
-
 module.exports = {
     register, 
     verifyPhone, 

@@ -2,9 +2,9 @@ const db = require("../config/dbconn.js");
 const { v4: uuidv4} = require("uuid");
 const jwt = require("jsonwebtoken");
 const config = require("../config/main.config.js");
-const { post } = require("../routes/senderRoute.js");
 const moment = require("moment");
 
+//add package to the package table
 const addPackage = (req, res) => {
     const token = req.cookies.access_token;
     if (!token) return res.status(401).json("user Not Logge In!");
@@ -34,16 +34,17 @@ const addPackage = (req, res) => {
 });
 }
 
-
-
+//get all package
 const getPackages = (req, res) => {
-        const q = "SELECT * FROM package"; 
+       //const q = "SELECT * FROM package"; 
+        const q ="SELECT user_sender.fullName, packageId, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice, package.created_at FROM  package JOIN user_sender ON user_sender.userId = package.userId";
         db.query(q, (err, data) => {
            if (err) return res.json(err);
            return res.status(200).json(data);
     });
 }
 
+//get single package by id
 const getPackage = (req, res) => {
     const token = req.cookies.access_token;
     if (!token) return res.status(401).json(" user Not Logge In!");
@@ -60,23 +61,23 @@ const getPackage = (req, res) => {
 });
 }
 
+//get single package
 const singlePackage = (req, res) => {
     const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logged In!");
-   console.log(token);
-
+  
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
         if(err) return res.status(403).json("Token is not valid");
 
-        const q = "SELECT fullName, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice, p.createdAt FROM  user_sender u JOIN package p ON u.userId=p.userId WHERE p.packageId = ?";
-        db.query(q, [req.params.packageId], (err, data) => {
+       const q = "SELECT user_sender.fullName, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice, package.created_at FROM package JOIN user_sender ON user_sender.userId = package.userId WHERE packageId = ?";
+       db.query(q, [req.params.packageId], (err, data) => {
             if (err) return res.status(403).json("No package with these Id");
 
             return res.status(200).json(data[0]);
         });
     });
-
 }
+//print all package
 const myPackage = (req, res) => {
     const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logged In!");
@@ -84,19 +85,15 @@ const myPackage = (req, res) => {
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
         if(err) return res.status(403).json("Token is not valid");
        
-       // const q = "SELECT packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice FROM package WHERE userId = (SELECT fullName, userId FROM user_sender WHERE userId = ?);"
-        const q = "SELECT fullName, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice FROM  user_sender u JOIN package p ON u.userId=p.userId WHERE P.userId = ?";
+         const q = "SELECT fullName, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice FROM  user_sender u JOIN package p ON u.userId=p.userId WHERE P.userId = ?";
         db.query(q, [userInfo.userId], (err, data) => {
             if (err) return res.status(403).json("No package with these Id");
 
             return res.status(200).json(data[0]);
         });
-
     });
-
 }
-
-
+//update the package 
 const updatePackage= (req, res) => {
     const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logged In!");
@@ -114,14 +111,14 @@ const updatePackage= (req, res) => {
             req.body.packagePrice,
             req.body.packageWeight, packageId, userInfo.userId], (err, data) =>{
             if (err) return res.status(500).json(err);
+
             return res.json("post has been updated");
         });
     });
 }
-
-
+//delete the package
 const deletePackage = (req, res) => {
-    const token = req.cookies.access_tooken
+    const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logge In!");
 
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
@@ -129,15 +126,13 @@ const deletePackage = (req, res) => {
 
         const packageId = req.params.packageId;
         const q = "DELETE FROM package WHERE packageId = ? AND userId = ?";
-
+    
         db.query(q, [packageId, userInfo.userId], (err, data) => {
             if (err) return res.status(403).json("You only delete Your Package Post");
 
             return res.json("Post Deleted");
         })
-
     });
-
 }
 
 module.exports = {

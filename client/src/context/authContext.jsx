@@ -8,6 +8,7 @@ export const AuthContexProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
+
   const loginSender = async (inputs) => {
     const res = await axios.post("http://localhost:8800/api/sender/login", inputs,
     {withCredentials: true});

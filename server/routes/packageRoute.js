@@ -8,6 +8,8 @@ router.get('/packages', packageControllor.getPackages);
 router.get('/:packageId', packageControllor.singlePackage);
 router.get('/mypackage', packageControllor.myPackage);
 
+
+router.delete('/:packageId', packageControllor.deletePackage);
 router.put('/pdatePackage', packageControllor.updatePackage);
 
 

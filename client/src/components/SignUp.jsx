@@ -26,8 +26,8 @@ try {
   await Axios.post("http://localhost:8800/api/sender/register", inputs, {
     withCredentials: true
   })
-  //navigate('/account/Identity/sender')
-  navigate('/user/account/sender/mobile/verify')
+  navigate('/account/Identity/sender')
+  //navigate('/user/account/sender/mobile/verify')
 } catch(err) {
     setError(`${err.response.data.message}`)
 }

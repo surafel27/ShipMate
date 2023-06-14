@@ -1,13 +1,23 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import Profile from '../assets/profile.png';
 //import Popup from './SinglePost.jsx'
 import './PostStyle.css';
 import NewPostCard from './NewPostCard';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { AuthContext } from '../context/authContext';
+
+const reloadPage = () => {
+  window.location.reload();
+}
+
 
 const PostSender = () => {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+  
   useEffect(() => {
     const fetchData = async () => {
       try{
@@ -24,6 +34,11 @@ const PostSender = () => {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+  useEffect(() => {
+    if (!currentUser) {
+      navigate('/account/Identity/sender');
+    }
+  }, []);
 
   return (
     <>
@@ -42,13 +57,14 @@ const PostSender = () => {
     <div className="home">
       <div className="package-card">
         {posts.map((post, index) => (
+          
           <div className="post" key={post.packageId}>
             
             <div className="user-header">
               <div className="user-photo">
                 <img src={Profile} alt="User" />
                 <h3>{post.fullName}</h3>
-                <p>{post.postTime}</p>
+                <p>Posted {moment(post.created_at).fromNow()}</p>
               </div>
               <div className="card-icon">
                 <div className="filter">
@@ -76,46 +92,27 @@ const PostSender = () => {
 };
 
 
-
 const PostTraveller = () => {
-  const posts = [
-    {
-      postId: 1,
-      img: Profile,
-      fullName: 'Surafel Fekadu Megiso',
-      postTime: 'posted 1hr ago',
-      packageRouteFrom: 'Addis Abab',
-      packageRouteTo: 'Hawassa',
-      detailStory:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-      price: '500',
-      packageWight: '10 kg',
-      dateToDelivery: 'Fir',
-      monthToDelivery: 'May',
-      yearToDelivery: '2023',
-    },
-    {
-      postId: 2,
-      img: Profile,
-      fullName: 'Surafel Fekadu Megiso',
-      postTime: 'posted 1hr ago',
-      packageRouteFrom: 'Addis Abab',
-      packageRouteTo: 'Hawassa',
-      detailStory:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-      price: '500',
-      packageWight: '10 kg',
-      dateToDelivery: 'Fir',
-      monthToDelivery: 'May',
-      yearToDelivery: '2023',
-    },
-  ];
-  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+  const [posts, setPosts] = useState([]);
 
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const res = await axios.get("http://localhost:8800/api/package/packages");
+        setPosts(res.data);
+      } catch(err) {
+        console.log(err)
+      }
+    };
+    fetchData();
+  }, []);
+  useEffect(() => {
+    if (!currentUser) {
+      navigate('/account/Identity/traveller');
+    }
+  }, []);
   return (
     <>
     <div className="search-input">
@@ -127,13 +124,14 @@ const PostTraveller = () => {
     <div className="home">
       <div className="package-card">
         {posts.map((post, index) => (
-          <div className="post" key={post.postId}>
+          
+          <div className="post" key={post.packageId}>
             
             <div className="user-header">
               <div className="user-photo">
-                <img src={post.img} alt="User" />
+                <img src={Profile} alt="User" />
                 <h3>{post.fullName}</h3>
-                <p>{post.postTime}</p>
+                <p>Posted {moment(post.created_at).fromNow()}</p>
               </div>
               <div className="card-icon">
                 <div className="filter">
@@ -141,16 +139,17 @@ const PostTraveller = () => {
                 </div>
               </div>
             </div>
+            <Link className='link' to={`/package/${post.packageId}`}>
             <div className="package-destination">
               <h3>
-                Package Route [{post.packageRouteFrom} - {post.packageRouteTo}]
+                Package Route [{post.packageFrom} - {post.packageTo}]
               </h3>
               <h5>
-                Fixed-Price: {post.price} birr | Package-Wight: {post.packageWight} | Date:{' '}
-                {post.dateToDelivery}, {post.monthToDelivery}, {post.yearToDelivery}
+                Fixed-Price: {post.packagePrice} birr | Package-Wight: {post.packageWeight} kg | Date:{post.packageDate}
               </h5>
-              <p>{post.detailStory}</p>
+              <p>{post.packageDesc}</p>
             </div>
+            </Link>
           </div>
         ))}
       </div>
@@ -161,6 +160,7 @@ const PostTraveller = () => {
 
 const Post = {
   sender: PostSender,
-  traveller: PostTraveller
+  traveller: PostTraveller,
+  reloadPg: reloadPage
 }
 export default Post;

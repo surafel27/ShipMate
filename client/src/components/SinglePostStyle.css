@@ -2,11 +2,10 @@
     position: fixed;
     display: block;
     top: 50%;
-    left: 65%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
+    width: 50%;
+    height: 50%;
     padding: 20px;
     box-shadow: 0 0 10px rgba(233, 230, 230, 0.2);
     z-index: 9999;
@@ -17,7 +16,6 @@
     margin-top: 20px;
     display: flex;
     flex-direction: row;
-    background-color: rgb(255, 255, 255);
     justify-content: space-between;
   }
   .close{
@@ -41,3 +39,18 @@
   button:hover {
     background-color: #099696;
   }
+  .edit {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .btn-edit {
+    width: 120px;
+    height: 40px;
+  }
+.btn-danger {
+  width: 120px;
+  height: 40px;
+  margin-left: 20px;
+  background-color: red;
+}

@@ -11,7 +11,7 @@ import PhoneIdentity from "./pages/PhoneVerification.jsx"
 import Indexsender from "./pages/sender/Index.jsx"
 import Indextraveller from "./pages/traveller/Index.jsx"
 import Subscribe from "./components/Subscribe.jsx";
-import Single from "./components/SinglePost.jsx";
+import SinglePackage from "./pages/sender/SinglePost.jsx";
 
 const SenderIdentity = Identity.sender;
 const TravellerIdentity = Identity.traveller;
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/package/:packageId",
-    element: <Single />
+    element: <SinglePackage />
   },
 
 

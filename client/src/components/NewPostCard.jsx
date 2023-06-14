@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import "./NewPostCardStyle.css";
 import { useNavigate } from 'react-router-dom';
 import Axios from "axios";
+import Post from './Post';
 
 const NewPostCard = ({ isOpen, togglePopup }) => {
+  const reloadPg = Post.reloadPg
   const [inputs, setInputs] = useState({
     packageFrom: "",
     packageTo: "",
@@ -15,6 +17,8 @@ const NewPostCard = ({ isOpen, togglePopup }) => {
 });
 const navigate = useNavigate();
 const [showAlert, setShowAlert] = useState(false);
+const [isLoading, setIsLoading] = useState(false);
+
 
 const handleChange = e =>{
 setInputs(prev=>({ ...prev, [e.target.name]: e.target.value}))
@@ -26,7 +30,9 @@ try {
   await Axios.post("http://localhost:8800/api/package/addPackage", inputs, {
     withCredentials: true,});
     setShowAlert(true);
+    togglePopup(!isOpen)
   navigate('/user/account/sender/dashboard');
+  reloadPg();
 } catch(err) {
   console.log(err);
 }
