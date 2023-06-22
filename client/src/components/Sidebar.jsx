@@ -17,14 +17,14 @@ function Sidebar() {
         icon: "fa-solid fa-users"
     },
     {
-      title : "My Profile",
+      title : "Profile",
       url : "/about",
       cName : "menu-item",
-      icon: "fa-solid fa-person-walking-luggage"
+      icon: "fa-solid fa-user"
   },
     {
-        title : "Jobs",
-        url : "/service",
+        title : "My Packages",
+        url : "/package/my_packages",
         cName : "menu-item",
         icon : "fa-solid fa-briefcase"
     },
@@ -75,7 +75,7 @@ const formattedDateTime = currentDateTime.toLocaleString();
                  })}
                  <li>
                   <Link onClick={handleSubmit}>
-                    <i className='fa-solid fa-user'></i>Logout</Link>
+                    <i className='fa-solid fa-arrow-up-left-from-circle'></i>Logout</Link>
                  </li>
       <li>{formattedDateTime}</li>          
       </ul>

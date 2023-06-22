@@ -73,6 +73,7 @@ const verifyPhone = (req, res) => {
    }).status(200).json("user has been redirects to login!") 
 };
 
+//sender login
 const login = (req, res) => {
     //check if user exist
     const q = "SELECT * FROM user_sender WHERE email = ?";

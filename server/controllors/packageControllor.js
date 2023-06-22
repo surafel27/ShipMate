@@ -63,7 +63,7 @@ const getPackage = (req, res) => {
 
 //get single package
 const singlePackage = (req, res) => {
-    const token = req.cookies.access_token
+    const token = req.cookies.access_token;
     if (!token) return res.status(401).json(" user Not Logged In!");
   
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
@@ -77,15 +77,14 @@ const singlePackage = (req, res) => {
         });
     });
 }
-//print all package
+//print user all package
 const myPackage = (req, res) => {
     const token = req.cookies.access_token
     if (!token) return res.status(401).json(" user Not Logged In!");
-
     jwt.verify(token, config.jwtSecret, (err, userInfo) => {
         if(err) return res.status(403).json("Token is not valid");
        
-         const q = "SELECT fullName, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice FROM  user_sender u JOIN package p ON u.userId=p.userId WHERE P.userId = ?";
+         const q = "SELECT user_sender.fullName, packageFrom, packageTo, packageWeight, packageCat, packageDate, packageDesc, packagePrice, package.created_at FROM  user_sender JOIN package ON user_sender.userId = package.userId WHERE package.userId = ?";
         db.query(q, [userInfo.userId], (err, data) => {
             if (err) return res.status(403).json("No package with these Id");
 
@@ -112,7 +111,7 @@ const updatePackage= (req, res) => {
             req.body.packageWeight, packageId, userInfo.userId], (err, data) =>{
             if (err) return res.status(500).json(err);
 
-            return res.json("post has been updated");
+            return res.json("Package Request has been updated");
         });
     });
 }

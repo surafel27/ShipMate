@@ -12,6 +12,8 @@ import Indexsender from "./pages/sender/Index.jsx"
 import Indextraveller from "./pages/traveller/Index.jsx"
 import Subscribe from "./components/Subscribe.jsx";
 import SinglePackage from "./pages/sender/SinglePost.jsx";
+import MyPackage from "./pages/sender/AllPackage.jsx";
+import Checkout from "./pages/sender/MyProfile.jsx";
 
 const SenderIdentity = Identity.sender;
 const TravellerIdentity = Identity.traveller;
@@ -90,7 +92,14 @@ const router = createBrowserRouter([
     path: "/package/:packageId",
     element: <SinglePackage />
   },
-
+  {
+    path: "/package/my_packages",
+    element: <MyPackage />
+  },
+  {
+    path: "/account/myprofile",
+    element: <Checkout />
+  },
 
 ]);
 
